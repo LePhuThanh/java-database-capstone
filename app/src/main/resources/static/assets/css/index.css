@@ -1,53 +1,268 @@
-/* this is the style sheet file for index.htlm  */
+/* ===========================
+   Global Reset
+=========================== */
 
-/* 
-**Global Reset (`*`)**
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-* Remove all default margin and padding.
-* Use `border-box` for sizing to include padding and border in element size.
+/* ===========================
+   Base
+=========================== */
 
-**Base (`html, body`)**
+html,
+body {
+    height: 100%;
+    font-family: "Roboto", sans-serif;
+}
 
-* Set height to 100% for full viewport layout.
-* Use the `'Roboto'` sans-serif font for modern, clean typography.
+/* ===========================
+   Layout
+=========================== */
 
-**Layout Wrapper (`.wrapper`)**
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-* Use a vertical flexbox layout.
-* Ensure the wrapper covers at least the full height of the screen (`min-height: 100vh`).
+/* ===========================
+   Heading
+=========================== */
 
-**Heading (`h2`)**
+h2 {
+    font-size: 48px;
+    margin-bottom: 50px;
+    color: #003e3e;
+    font-weight: bold;
+    font-family: "Alegreya", "Roboto", sans-serif;
+}
 
-* Set a large font size (`48px`) for prominence.
-* Add a bottom margin of `50px` for spacing.
-* Use a dark teal color (`#003e3e`).
-* Make the font bold and use a blended font stack (`'Alegreya', 'Roboto', sans-serif`) for elegant styling.
+/* ===========================
+   Main Content
+=========================== */
 
-**Main Section (`.main-content`)**
+.main-content {
+    flex-grow: 1;
 
-* Allow the section to grow to fill space with `flex-grow: 1`.
-* Add `40px` of internal padding.
-* Center content both horizontally and vertically using `justify-content` and `align-items`.
-* Display items in a column direction.
-* Center all text.
-* Apply a full-screen background image with:
+    display: flex;
+    flex-direction: column;
 
-  * `cover` size
-  * `center` positioning
-  * no repeat
-  * `fixed` attachment to keep image still during scroll
+    justify-content: center;
+    align-items: center;
 
-**Buttons (`button`)**
+    text-align: center;
 
-* Style with a teal green background (`#015c5d`) and white text.
-* Remove borders and round the corners (`12px`).
-* Use `10px 20px` padding and set width to `200px`.
-* Add a top margin of `10px` for spacing.
-* Enable pointer cursor and readable font size (`16px`).
-* On hover, change background color to bold red (`#A62B1F`).
+    padding: 40px;
 
-**Dashboard Buttons (`.dashboard-btn`)**
+    background-image: url("../images/defineRole/index.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 
-* Use the same base green background (`#015c5d`) as the default button.
-* On hover, darken the background to deep teal (`#003e3e`) for visual feedback.
- */
+/* ===========================
+   Buttons
+=========================== */
+
+button {
+    width: 200px;
+
+    padding: 10px 20px;
+
+    margin-top: 10px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #015c5d;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #a62b1f;
+}
+
+/* ===========================
+   Dashboard Button
+=========================== */
+
+.dashboard-btn {
+    background: #015c5d;
+}
+
+.dashboard-btn:hover {
+    background: #003e3e;
+}
+
+/* ===========================
+   Input
+=========================== */
+
+.input-field,
+.select-dropdown {
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+.input-field:focus,
+.select-dropdown:focus {
+    border-color: #015c5d;
+}
+
+/* ===========================
+   Checkbox
+=========================== */
+
+.checkbox-group {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+/* ===========================
+   Modal
+=========================== */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    min-width: 350px;
+
+    position: relative;
+}
+
+/* ===========================
+   Close Button
+=========================== */
+
+.close,
+#closeModal {
+    position: absolute;
+
+    right: 15px;
+    top: 10px;
+
+    font-size: 26px;
+
+    cursor: pointer;
+
+    color: #444;
+}
+
+.close:hover,
+#closeModal:hover {
+    color: red;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 20px 40px;
+
+    background: white;
+}
+
+.header img {
+    height: 60px;
+}
+
+.header nav {
+    display: flex;
+
+    gap: 20px;
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+.footer {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+    background: #003e3e;
+
+    color: white;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 32px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .header {
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+    .footer {
+        flex-direction: column;
+
+        text-align: center;
+    }
+}
