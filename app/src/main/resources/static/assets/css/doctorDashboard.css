@@ -1,262 +1,164 @@
-/* ==========================================
-   Global Reset
-========================================== */
+/* This is the style sheet for the doctorDashboard.html */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* ==========================================
-   Base
-========================================== */
-
-html,
-body {
-    height: 100%;
-    font-family: Arial, sans-serif;
-}
-
-/* ==========================================
-   Layout
-========================================== */
-
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.main-content {
-    flex-grow: 1;
-
-    display: flex;
-    flex-direction: column;
-
-    padding: 40px;
-}
-
-/* ==========================================
-   Search & Filter
-========================================== */
-
-#searchBar {
-    width: 350px;
-
-    padding: 10px 15px;
-
-    border: 1px solid #ccc;
-
-    border-radius: 8px;
-
-    outline: none;
-
-    margin-bottom: 20px;
-}
-
-#searchBar:focus {
-    border-color: #015c5d;
-}
-
-.filter-section {
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-bottom: 25px;
-
-    flex-wrap: wrap;
-}
-
-/* ==========================================
-   Buttons
-========================================== */
-
-button {
-    padding: 10px 20px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #015c5d;
-
-    color: white;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #017d7e;
-}
-
-/* ==========================================
-   Today Button
-========================================== */
-
-.today-btn {
-    margin-right: 10px;
-
-    padding: 10px;
-
-    background: #015c5d;
-}
-
-/* ==========================================
-   Date Picker
-========================================== */
-
-.date-picker {
-    margin-left: 10px;
-
-    margin-top: 13px;
-
-    padding: 10px;
-
-    height: 40px;
-
-    border-radius: 8px;
-
-    border: 1px solid #ccc;
-}
-
-/* ==========================================
-   Table Header
-========================================== */
-
+/* === Table Header === */
 .table-header {
-    font-size: 24px;
-
-    color: #015c5d;
-
-    margin-bottom: 30px;
-
-    margin-right: 0;
+  font-size: 24px;
+  color: #015c5d;
+  margin-bottom: 30px;
+  margin-right: 0;
 }
 
-/* ==========================================
-   Table
-========================================== */
-
+/* === Table Styling === */
 table {
-    width: 100%;
-
-    border-collapse: collapse;
-
-    font-family: sans-serif;
-
-    margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  font-family: sans-serif;
+  margin-top: 20px;
 }
 
-/* ==========================================
-   Table Head
-========================================== */
-
+/* === Table Head === */
 thead {
-    background: #33333310;
-
-    color: white;
+  background-color: #33333310;
+  color: #fff;
 }
 
-/* ==========================================
-   Table Cells
-========================================== */
-
-th,
-td {
-    padding: 12px 16px;
-
-    text-align: center;
-
-    border-bottom: 1px solid #ddd;
+/* === Table Cells === */
+td, th {
+  padding: 12px 16px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
 }
 
-/* ==========================================
-   Table Rows
-========================================== */
-
+/* === Table Row Styling === */
 tbody tr:nth-child(even) {
-    background: #f9f9f959;
+  background-color: #f9f9f959;
 }
 
 tbody tr:nth-child(odd) {
-    background: #ffffffc0;
+  background-color: #ffffffc0;
 }
 
 tbody tr:hover {
-    background: #015c5d39;
+  background-color: #015c5d39;
 }
 
-/* ==========================================
-   Prescription Button
-========================================== */
-
+/* === Prescription Button === */
 .prescription-btn {
-    width: 30px;
-
-    height: 30px;
-
-    cursor: pointer;
-
-    transition: 0.25s;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .prescription-btn:hover {
-    transform: scale(1.1);
-
-    filter: brightness(1.15);
+  transform: scale(1.1);
+  filter: brightness(1.2);
 }
 
 .prescription-btn:active {
-    transform: scale(0.95);
+  transform: scale(0.95);
 }
 
-/* ==========================================
-   No Patient Record
-========================================== */
-
+/* === No Patient Record Message === */
 .noPatientRecord {
-    font-size: 16px;
-
-    color: gray;
-
-    font-style: italic;
-
-    text-align: center;
-
-    padding: 30px;
+  font-size: 16px;
+  font-style: italic;
+  color: gray;
+  text-align: center;
+  margin-top: 20px;
 }
 
-/* ==========================================
-   Responsive
-========================================== */
-
-@media (max-width: 768px) {
-    .filter-section {
-        flex-direction: column;
-
-        align-items: stretch;
-    }
-
-    #searchBar {
-        width: 100%;
-    }
-
-    table {
-        font-size: 14px;
-    }
-
-    th,
-    td {
-        padding: 8px;
-    }
-
-    .table-header {
-        font-size: 20px;
-    }
+/* === Today Button === */
+#todayButton {
+  margin-right: 10px;
+  padding: 10px;
+  background-color: #015c5d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
 }
+
+#todayButton:hover {
+  background-color: #013f40;
+}
+
+/* === Date Picker === */
+#datePicker {
+  margin-left: 10px;
+  margin-top: 13px;
+  border-radius: 8px;
+  padding: 10px;
+  height: 30px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+}
+
+
+/* This is the style sheet for the doctorDashboard.html */
+/* 
+**Table Header (`.table-header`)**
+
+* Set font size to `24px` for clear emphasis.
+* Use a dark teal color (`#015c5d`) for consistency with the theme.
+* Add `30px` bottom margin and remove right margin.
+
+**Table Styling (`table`)**
+
+* Make the table full width (`100%`).
+* Collapse borders for clean lines.
+* Use a `sans-serif` font.
+* Add `20px` top margin for spacing.
+
+**Table Head (`thead`)**
+
+* Set a very light dark background (`#33333310`) for header row.
+* Use white text color (`#fff`).
+
+**Table Cells (`td, th`)**
+
+* Apply padding of `12px 16px` for spacing.
+* Center-align the text.
+* Add a subtle bottom border (`1px solid #ddd`).
+
+**Table Row Styling**
+
+* Alternate row colors for better readability:
+
+  * Even rows: semi-transparent light grey (`#f9f9f959`).
+  * Odd rows: soft white background (`#ffffffc0`).
+* On hover: highlight row with a light teal overlay (`#015c5d39`).
+
+**Prescription Button (`.prescription-btn`)**
+
+* Set size to `30px x 30px`.
+* Make it interactive with a pointer cursor.
+* Add transition effects for scale and brightness on hover.
+* On hover:
+
+  * Slightly enlarge (`scale(1.1)`)
+  * Brighten appearance
+* On click: slightly shrink (`scale(0.95)`).
+
+**No Record Message (`.noPatientRecord`)**
+
+* Use a `16px` italic grey font to indicate no data gently.
+
+**Today Button (`.today-btn`)**
+
+* Add right margin (`10px`).
+* Add padding (`10px`).
+* Set background color to teal green (`#015c5d`).
+
+**Date Picker (`.date-picker`)**
+
+* Add left margin (`10px`) and top margin (`13px`).
+* Round corners with `8px` radius.
+* Add padding (`10px`) and set fixed height (`30px`).
+
+---
+
+Let me know if you'd like a consolidated style guide for the entire HospitalCRM frontend.
+ */

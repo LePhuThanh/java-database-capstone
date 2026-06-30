@@ -87,21 +87,36 @@ export function showBookingOverlay(e, doctor, patient) {
 
 
 // Filter Input
-document.getElementById("searchBar").addEventListener("input", filterDoctorsOnChange);
-document.getElementById("filterTime").addEventListener("change", filterDoctorsOnChange);
-document.getElementById("filterSpecialty").addEventListener("change", filterDoctorsOnChange);
+const searchBar = document.getElementById("searchBar");
+if (searchBar) {
+  searchBar.addEventListener("input", filterDoctorsOnChange);
+}
+
+const filterTime = document.getElementById("filterTime");
+if (filterTime) {
+  filterTime.addEventListener("change", filterDoctorsOnChange);
+}
+
+const filterSpecialty = document.getElementById("filterSpecialty");
+if (filterSpecialty) {
+  filterSpecialty.addEventListener("change", filterDoctorsOnChange);
+}
 
 
 
 function filterDoctorsOnChange() {
-  const searchBar = document.getElementById("searchBar").value.trim();
-  const filterTime = document.getElementById("filterTime").value;
-  const filterSpecialty = document.getElementById("filterSpecialty").value;
+  const searchBar = document.getElementById("searchBar");
+  const filterTime = document.getElementById("filterTime");
+  const filterSpecialty = document.getElementById("filterSpecialty");
+
+  const searchBarValue = searchBar ? searchBar.value.trim() : "";
+  const filterTimeValue = filterTime ? filterTime.value : "";
+  const filterSpecialtyValue = filterSpecialty ? filterSpecialty.value : "";
 
 
-  const name = searchBar.length > 0 ? searchBar : null;
-  const time = filterTime.length > 0 ? filterTime : null;
-  const specialty = filterSpecialty.length > 0 ? filterSpecialty : null;
+  const name = searchBarValue.length > 0 ? searchBarValue : null;
+  const time = filterTimeValue.length > 0 ? filterTimeValue : null;
+  const specialty = filterSpecialtyValue.length > 0 ? filterSpecialtyValue : null;
 
   filterDoctors(name, time, specialty)
     .then(response => {

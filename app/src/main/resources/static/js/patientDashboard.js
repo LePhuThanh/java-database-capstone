@@ -1,10 +1,11 @@
 // patientDashboard.js
 import { getDoctors } from './services/doctorServices.js';
-import { openModal, closeModal } from './components/modals.js';
+import { openModal } from './components/modals.js';
 import { createDoctorCard } from './components/doctorCard.js';
 import { filterDoctors } from './services/doctorServices.js';//call the same function to avoid duplication coz the functionality was same
 import { patientSignup, patientLogin } from './services/patientServices.js';
-import { showError } from '../js/services/index.js';
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   loadDoctorCards();
@@ -46,6 +47,8 @@ document.getElementById("searchBar").addEventListener("input", filterDoctorsOnCh
 document.getElementById("filterTime").addEventListener("change", filterDoctorsOnChange);
 document.getElementById("filterSpecialty").addEventListener("change", filterDoctorsOnChange);
 
+
+
 function filterDoctorsOnChange() {
   const searchBar = document.getElementById("searchBar").value.trim();
   const filterTime = document.getElementById("filterTime").value;
@@ -57,7 +60,8 @@ function filterDoctorsOnChange() {
   const specialty = filterSpecialty.length > 0 ? filterSpecialty : null;
 
   filterDoctors(name, time, specialty)
-    .then(doctors => {
+    .then(response => {
+      const doctors = response.doctors;
       const contentDiv = document.getElementById("content");
       contentDiv.innerHTML = "";
 
@@ -87,52 +91,45 @@ window.signupPatient = async function () {
     const address = document.getElementById("address").value;
 
     const data = { name, email, password, phone, address };
-
-    console.log("Signup Patient :: ", data)
-    const response = await patientSignup(data);
-    console.log("Response:", response);
-    const result = await response.json();
-    console.log(result);
-    if (response.ok) {
-      selectRole('loggedPatient');
-      localStorage.setItem('token', result.token)
-      closeModal();
-      // document.getElementById("modal").style.display = "none";
+    const { success, message } = await patientSignup(data);
+    if (success) {
+      alert(message);
+      document.getElementById("modal-overlay").style.display = "none";
       window.location.reload();
-    } else {
-      throw new Error(result.error || 'An error occurred while signing up.');
     }
+    else alert(message);
   } catch (error) {
     console.error("Signup failed:", error);
-    // alert("❌ An error occurred while signing up.");
-    showError('patientSignupError', `❌ Failed to Signup: ${error.message}`);
+    alert("❌ An error occurred while signing up.");
   }
 };
 
 window.loginPatient = async function () {
   try {
-    const identifier = document.getElementById("email").value;
+    const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
     const data = {
-      identifier,
+      email,
       password
     }
     console.log("loginPatient :: ", data)
     const response = await patientLogin(data);
-    console.log("Response:", response);
-    const result = await response.json();
-    console.log(result);
+    console.log("Status Code:", response.status);
+    console.log("Response OK:", response.ok);
     if (response.ok) {
+      const token = await response.text();
+      console.log(token);
       selectRole('loggedPatient');
-      localStorage.setItem('token', result.token)
+      localStorage.setItem('token', token)
       window.location.href = '/pages/loggedPatientDashboard.html';
     } else {
-      throw new Error(result.error || 'Invalid credentials');
+      alert('❌ Invalid credentials!');
     }
   }
   catch (error) {
-    showError('patientLoginError', `❌ Failed to Login: ${error.message}`);
+    alert("❌ Failed to Login : ", error);
+    console.log("Error :: loginPatient :: ", error)
   }
 
 

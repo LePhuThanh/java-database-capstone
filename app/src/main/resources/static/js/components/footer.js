@@ -1,54 +1,57 @@
-/**
- * Footer Component - Renders consistent footer across all pages
- * Contains branding, navigation links, and legal information
- */
+// footer.js — reusable static footer renderer
 
-function renderFooter() {
-    const footer = document.getElementById("footer");
-    if (!footer) return;
+export function renderFooter() {
+  const footerDiv = document.getElementById("footer");
 
-    footer.innerHTML = `
-        <footer class="footer">
-            <div class="footer-container">
-                <!-- Branding Section -->
-                <div class="footer-logo">
-                    <img src="../../assets/images/logo/logo.png" alt="Hospital CMS Logo">
-                    <p>© ${new Date().getFullYear()} Hospital CMS. All Rights Reserved.</p>
-                </div>
+  if (!footerDiv) return;
 
-                <!-- Navigation Links -->
-                <div class="footer-links">
-                    <!-- Company Links -->
-                    <div class="footer-column">
-                        <h4>Company</h4>
-                        <a href="/about">About Us</a>
-                        <a href="/careers">Careers</a>
-                        <a href="/press">Press</a>
-                    </div>
+  footerDiv.innerHTML = `
+    <footer class="footer">
+      <div class="footer-container">
 
-                    <!-- Support Links -->
-                    <div class="footer-column">
-                        <h4>Support</h4>
-                        <a href="/account">Account</a>
-                        <a href="/help">Help Center</a>
-                        <a href="/contact">Contact Us</a>
-                    </div>
+        <!-- Footer Logo and Copyright -->
+        <div class="footer-logo">
+          <img src="../assets/images/logo/logo.png" alt="Hospital CMS Logo" class="footer-logo-img">
+          <p>© Copyright 2025. All Rights Reserved by Hospital CMS.</p>
+        </div>
 
-                    <!-- Legal Links -->
-                    <div class="footer-column">
-                        <h4>Legal</h4>
-                        <a href="/terms">Terms & Conditions</a>
-                        <a href="/privacy">Privacy Policy</a>
-                        <a href="/licensing">Licensing</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    `;
+        <!-- Footer Links Group -->
+        <div class="footer-links">
+
+          <!-- Company Column -->
+          <div class="footer-column">
+            <h4>Company</h4>
+            <a href="#">About</a>
+            <a href="#">Careers</a>
+            <a href="#">Press</a>
+          </div>
+
+          <!-- Support Column -->
+          <div class="footer-column">
+            <h4>Support</h4>
+            <a href="#">Account</a>
+            <a href="#">Help Center</a>
+            <a href="#">Contact Us</a>
+          </div>
+
+          <!-- Legals Column -->
+          <div class="footer-column">
+            <h4>Legals</h4>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Licensing</a>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+  `;
 }
 
-// Initialize footer on page load
-document.addEventListener("DOMContentLoaded", renderFooter);
+// Automatically render footer on page load
+renderFooter();
+
+
 
 
 /*

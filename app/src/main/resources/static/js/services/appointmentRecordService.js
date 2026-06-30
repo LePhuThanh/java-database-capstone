@@ -5,7 +5,10 @@ const APPOINTMENT_API = `${API_BASE_URL}/appointments`;
 
 //This is for the doctor to get all the patient Appointments
 export async function getAllAppointments(date, patientName, token) {
-  const response = await fetch(`${APPOINTMENT_API}/${date}/${patientName}/${token}`);
+  const params = new URLSearchParams();
+  if (patientName) params.append("patientName", patientName);
+
+  const response = await fetch(`${APPOINTMENT_API}/${token}/${date}?${params.toString()}`);
   if (!response.ok) {
     throw new Error("Failed to fetch appointments");
   }
@@ -15,7 +18,7 @@ export async function getAllAppointments(date, patientName, token) {
 
 export async function bookAppointment(appointment, token) {
   try {
-    const response = await fetch(`${APPOINTMENT_API}/${token}`, {
+    const response = await fetch(`${APPOINTMENT_API}/book/${token}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -23,10 +26,10 @@ export async function bookAppointment(appointment, token) {
       body: JSON.stringify(appointment)
     });
 
-    const data = await response.json();
+    const data = await response.text();
     return {
       success: response.ok,
-      message: data.message || "Something went wrong"
+      message: data || "Something went wrong"
     };
   } catch (error) {
     console.error("Error while booking appointment:", error);
@@ -39,7 +42,7 @@ export async function bookAppointment(appointment, token) {
 
 export async function updateAppointment(appointment, token) {
   try {
-    const response = await fetch(`${APPOINTMENT_API}/${token}`, {
+    const response = await fetch(`${APPOINTMENT_API}/update/${token}/${appointment.id}/${appointment.patient.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -47,10 +50,10 @@ export async function updateAppointment(appointment, token) {
       body: JSON.stringify(appointment)
     });
 
-    const data = await response.json();
+    const data = await response.text();
     return {
       success: response.ok,
-      message: data.message || "Something went wrong"
+      message: data || "Something went wrong"
     };
   } catch (error) {
     console.error("Error while booking appointment:", error);

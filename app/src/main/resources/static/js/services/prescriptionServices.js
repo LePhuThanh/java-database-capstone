@@ -4,7 +4,7 @@ import { API_BASE_URL } from '../config/config.js'
 const PRESCRITION_API = API_BASE_URL + "/prescription"
 export async function savePrescription(prescription, token) {
   try {
-    const response = await fetch(`${PRESCRITION_API}/${token}`, {
+    const response = await fetch(`${PRESCRITION_API}/save/${token}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json"
@@ -16,7 +16,7 @@ export async function savePrescription(prescription, token) {
   }
   catch (error) {
     console.error("Error :: savePrescription :: ", error)
-    return { success: false, message: result.message }
+    return { success: false, message: error.message }
   }
 }
 
