@@ -1,70 +1,41 @@
 package com.project.back_end.mvc;
 
-import com.project.back_end.service.CommonService;
-import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.Map;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequiredArgsConstructor
 public class DashboardController {
 
-    /**
-     * Shared service used for validating JWT tokens.
-     */
-    private final CommonService commonService;
+    // 2. Autowire the shared service (assumed name: TokenValidationService)
+    @Autowired
+    private TokenValidationService tokenValidationService;
 
-    /**
-     * Admin Dashboard
-     *
-     * URL:
-     * http://localhost:8080/adminDashboard/{token}
-     *
-     * If token is valid:
-     *      -> Render admin/adminDashboard.html
-     *
-     * Otherwise:
-     *      -> Redirect to home page
-     */
+    // 3. Admin dashboard handler
     @GetMapping("/adminDashboard/{token}")
-    public String adminDashboard(@PathVariable String token) {
+    public ModelAndView adminDashboard(@PathVariable("token") String token) {
+        boolean isValid = tokenValidationService.validateToken(token, "admin");
 
-        Map<String, Object> validationResult =
-                commonService.validateToken(token, "admin");
-
-        if (validationResult.isEmpty()) {
-            return "admin/adminDashboard";
+        if (isValid) {
+            return new ModelAndView("admin/adminDashboard");
+        } else {
+            return new ModelAndView("redirect:/");
         }
-
-        return "redirect:/";
     }
 
-    /**
-     * Doctor Dashboard
-     *
-     * URL:
-     * http://localhost:8080/doctorDashboard/{token}
-     *
-     * If token is valid:
-     *      -> Render doctor/doctorDashboard.html
-     *
-     * Otherwise:
-     *      -> Redirect to home page
-     */
+    // 4. Doctor dashboard handler
     @GetMapping("/doctorDashboard/{token}")
-    public String doctorDashboard(@PathVariable String token) {
+    public ModelAndView doctorDashboard(@PathVariable("token") String token) {
+        boolean isValid = tokenValidationService.validateToken(token, "doctor");
 
-        Map<String, Object> validationResult =
-                commonService.validateToken(token, "doctor");
-
-        if (validationResult.isEmpty()) {
-            return "doctor/doctorDashboard";
+        if (isValid) {
+            return new ModelAndView("doctor/doctorDashboard");
+        } else {
+            return new ModelAndView("redirect:/");
         }
-
-        return "redirect:/";
     }
-
 }
+
